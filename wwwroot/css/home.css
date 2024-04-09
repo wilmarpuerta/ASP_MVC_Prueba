@@ -1,0 +1,13 @@
+
+.container-home{
+    position: absolute;
+    width: 100vw;
+    height: 97.8vh;
+    background: url(https://www.bizneo.com/blog/wp-content/uploads/2023/02/entrevista-de-seleccion-1.jpg);
+    background-size: cover;
+}
+
+.container-home .container-btns{
+    gap: 10px;
+    padding: 10% 40% 0 40%;
+}

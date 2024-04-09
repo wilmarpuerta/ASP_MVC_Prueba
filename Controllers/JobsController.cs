@@ -18,4 +18,16 @@ public class JobsController : Controller
     {
         return View(await _context.Jobs.ToListAsync());
     }
+
+    public async Task<IActionResult> Show(int? id)
+    {
+        return View(await _context.Jobs.FirstOrDefaultAsync(m => m.ID == id));
+    }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+   
 }

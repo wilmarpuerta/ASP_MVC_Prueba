@@ -1,8 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    ViewBag.Css = "home.css";
 }
 
+<div class="container-home">
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4 mt-4 fw-bold">Bolsa de Empleo</h1>
+    <div class="d-flex flex-column container-btns">
+        <a class="btn btn-primary btn-lg" asp-area="" asp-controller="Jobs" asp-action="Index">Ver ofertas de empleo</a>
+        <a class="btn btn-primary btn-lg" asp-area="" asp-controller="Home" asp-action="About">Crear oferta de empleo</a>
+        <a class="btn btn-success btn-lg" asp-area="" asp-controller="Home" asp-action="Contact">Listar empleados</a>
+        <a class="btn btn-success btn-lg" asp-area="" asp-controller="Home" asp-action="Contact">Registar empleado</a>
+    </div>
+    
+</div>
 </div>
