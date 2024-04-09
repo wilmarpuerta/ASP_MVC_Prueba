@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using ASP_MVC_Prueba.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<DBContext> (options => 
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("MySqlConnection"),
+        Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.20-mysql")));
 
 var app = builder.Build();
 
