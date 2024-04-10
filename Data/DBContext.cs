@@ -10,5 +10,6 @@ public class DBContext : DbContext
 
     }
     public DbSet<Job> Jobs { get; set; }
+    public DbSet<Employe> Employees { get; set; }
 }
 

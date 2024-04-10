@@ -1,5 +1,5 @@
 
-
+namespace ASP_MVC_Prueba.Models;
 public class Job
 {
     public int? ID { get; set; }

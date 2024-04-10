@@ -8,10 +8,11 @@ namespace ASP_MVC_Prueba.Controllers;
 public class JobsController : Controller
 {
     public readonly DBContext _context;
-
-    public JobsController(DBContext context)
+    private readonly IWebHostEnvironment _webHostEnvironment;
+    public JobsController(DBContext context, IWebHostEnvironment webHostEnvironment)
     {
         _context = context;
+        _webHostEnvironment = webHostEnvironment;
     }
 
     public async Task<IActionResult> Index()
@@ -24,10 +25,73 @@ public class JobsController : Controller
         return View(await _context.Jobs.FirstOrDefaultAsync(m => m.ID == id));
     }
 
+    public async Task<IActionResult> Delete(int? id)
+    {
+        var job = await _context.Jobs.FindAsync(id);
+        _context.Jobs.Remove(job);
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Index");
+    }
+
     public IActionResult Create()
     {
         return View();
     }
 
+    [HttpPost]
+    public async Task<IActionResult>Create(Job j, IFormFile file, string status)
+    {
+        string nameFile = file.FileName;
+        string uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath + "\\" + "img");
+
+        if (!Directory.Exists(uploadFolder))
+                {
+                    Directory.CreateDirectory(uploadFolder);
+                }
+
+        string filePath = Path.Combine(uploadFolder, nameFile);
+
+                using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+        j.LogoCompany = nameFile;
+        j.Status = status;
+        _context.Jobs.Add(j);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
+
+
+    public async Task<IActionResult> Update(int? id)
+    {
+        return View(await _context.Jobs.FirstOrDefaultAsync(m => m.ID == id));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult>Update(Job j, IFormFile file, string status)
+    {
+        string nameFile = file.FileName;
+        string uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath + "\\" + "img");
+
+        if (!Directory.Exists(uploadFolder))
+                {
+                    Directory.CreateDirectory(uploadFolder);
+                }
+
+        string filePath = Path.Combine(uploadFolder, nameFile);
+
+                using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+        j.LogoCompany = nameFile;
+        j.Status = status;
+        _context.Jobs.Update(j);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
    
 }

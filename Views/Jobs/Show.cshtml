@@ -1,16 +1,28 @@
 @{
-    ViewBag.Title = "Jobs";
+    ViewBag.Title = "Show";
 }
+
 <div class="container">
-    <h6 class="display-4 mt-4 fw-bold text-center mb-5">Crear nuevo empleado</h6>
+    <h6 class="display-4 mt-4 fw-bold text-center mb-5">Detalles de empleo / @Model.OfferTitle</h6>
     <div class="row">
         <div class="col-md-3 border container-left">
-            <a class="btn btn-secondary" asp-area="" asp-controller="Jobs" asp-action="Create">Registrar nuevo
-                empleado</a>
-            <a class="btn btn-primary" asp-area="" asp-controller="Jobs" asp-action="Index">Listado de empleados</a>
+            <a class="btn btn-secondary" asp-area="" asp-controller="Jobs" asp-action="Create">Crear oferta de empleo</a>
+            <a class="btn btn-primary" asp-area="" asp-controller="Jobs" asp-action="Index">Listado de ofertas</a>
         </div>
         <div class="col-md-8 container-right">
+            <div><img src="~/img/@Model.LogoCompany" alt="" style="width: 100px;"></div>
+            <h4>@Model.OfferTitle</h4>
+            <p>@Model.NameCompany</p>
+            <p>@Model.Salary</p>
+            <p>@Model.Positions</p>
+            <p>@Model.Country</p>
+            <p>@Model.Languages</p>
+            <br>
+            <h6>Description</h6>
+            <p>@Model.Description</p>
             
+        </div>
+        <div>
         </div>
     </div>
 </div>

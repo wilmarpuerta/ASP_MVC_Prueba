@@ -5,9 +5,8 @@
     <h6 class="display-4 mt-4 fw-bold text-center mb-5">Listado de ofertas de empleo</h6>
     <div class="row">
         <div class="col-md-3 border container-left">
-            <a class="btn btn-secondary" asp-area="" asp-controller="Jobs" asp-action="Create">Registrar nuevo
-                empleado</a>
-            <a class="btn btn-primary" asp-area="" asp-controller="Jobs" asp-action="Index">Listado de empleados</a>
+            <a class="btn btn-secondary" asp-area="" asp-controller="Jobs" asp-action="Create">Crear oferta de empleo</a>
+            <a class="btn btn-primary" asp-area="" asp-controller="Jobs" asp-action="Index">Listado de ofertas</a>
         </div>
         <div class="col-md-8 container-right">
             <div class="input-group mb-3">
@@ -37,7 +36,7 @@
                         <tr>
                             <td>@job.ID</td>
                             <td>@job.NameCompany</td>
-                            <td>@job.LogoCompany</td>
+                            <td><img src="~/img/@job.LogoCompany" alt="" style="width: 50px;"></td>
                             <td>@job.OfferTitle</td>
                             <td>@job.Description</td>
                             <td>@job.Salary</td>
