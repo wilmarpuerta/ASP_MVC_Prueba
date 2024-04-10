@@ -1,0 +1,46 @@
+@{
+    ViewBag.Title = "Empleados";
+}
+<div>
+    <h6 class="display-4 mt-4 fw-bold text-center mb-5">Listado de empleados</h6>
+    <div class="row">
+        <div class="col-md-3 border container-left">
+            <a class="btn btn-secondary" asp-area="" asp-controller="Employees" asp-action="Create">Registrar nuevo empleado</a>
+            <a class="btn btn-primary" asp-area="" asp-controller="Employees" asp-action="Index">Listado de empleados</a>
+        </div>
+        <div class="col-md-8 container-right">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Buscar..."
+                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-outline-primary" type="button" id="button-addon2">Buscar</button>
+            </div>
+            <table class="table-list">
+                <thead>
+                    <tr>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Correo</th>
+                        <th>Acerca de</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var empl in Model)
+                    {
+                        <tr>
+                            <td>@empl.Names</td>
+                            <td>@empl.LastNames</td>
+                            <td>@empl.Email</td>
+                            <td>@empl.About</td>
+                            <td>
+                                <a asp-action="Show" asp-route-id="@empl.ID">Detalles</a>
+                                <a asp-action="Delete" asp-route-id="@empl.ID">Borrar</a>
+                                <a asp-action="Update" asp-route-id="@empl.ID">Actualizar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

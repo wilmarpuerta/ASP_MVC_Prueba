@@ -93,5 +93,17 @@ public class JobsController : Controller
         _context.SaveChanges();
         return RedirectToAction("Index");
     }
+
+    public IActionResult Search(string? SearchString)
+    {
+        var jobs = _context.Jobs.AsQueryable();
+
+        if (!string.IsNullOrEmpty(SearchString))
+        {
+            jobs = jobs.Where(u => u.NameCompany.Contains(SearchString));
+        }
+
+        return View("Index", jobs.ToList());
+    }
    
 }

@@ -39,10 +39,22 @@ public class EmployeesController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult>Create(Employe e, IFormFile file, string status)
+    public async Task<IActionResult>Create(Employe e, IFormFile file, string Genero, string EstadoC)
     {
         string nameFile = file.FileName;
-        string uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath + "\\" + "img");
+        string nameFileImg = "";
+        string nameFileDocs = "";
+        string uploadFolder = "";
+        if (nameFile.Contains(".jpg") ||nameFile.Contains(".png") )
+        {
+            uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath + "\\" + "img");
+            nameFileImg = file.FileName;
+        }
+        else if (nameFile.Contains(".pdf"))
+        {
+            uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath + "\\" + "docs");
+            nameFileDocs = file.FileName;
+        }
 
         if (!Directory.Exists(uploadFolder))
                 {
@@ -56,10 +68,10 @@ public class EmployeesController : Controller
                     await file.CopyToAsync(stream);
                 }
 
-        /* e.LogoCompany = nameFile;
-        e.Status = status; *//* 
-        _context.Jobs.Add(e);
-        _context.SaveChanges(); */
+        e.ProfilePicture = nameFileImg;
+        e.Cv = nameFileDocs;
+        // _context.Jobs.Add(e);
+        _context.SaveChanges();
         return RedirectToAction("Index");
     }
 

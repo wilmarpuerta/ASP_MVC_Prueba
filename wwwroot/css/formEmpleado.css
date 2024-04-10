@@ -1,0 +1,41 @@
+
+.container-right .columFather{
+    display: flex;
+    margin-bottom: 10px;
+}
+.colum1 div{
+    display: flex;
+    flex-direction: column;
+}
+.colum2 div{
+    display: flex;
+    flex-direction: column;
+}
+
+.colum3 div{
+    display: flex;
+    flex-direction: column; 
+}
+
+.row1 {
+    padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.row1 input{
+    height: 50px;
+}
+
+.row2{
+    display: flex;
+    padding: 0 50px;
+}
+
+.btn-crear{
+    margin-left: 50px;
+    margin-top: 15px;
+    width: 90%;
+    background-color: rgb(47, 255, 47);
+    color: #fff;
+}

@@ -9,15 +9,16 @@
             <a class="btn btn-primary" asp-area="" asp-controller="Jobs" asp-action="Index">Listado de ofertas</a>
         </div>
         <div class="col-md-8 container-right">
+            <form asp-controller="Jobs" asp-action="Search" method="get">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Buscar..."
+                <input type="text" class="form-control" name="SearchString" placeholder="Buscar..."
                     aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-outline-primary" type="button" id="button-addon2">Buscar</button>
+                <button class="btn btn-outline-primary" type="submit" id="button-addon2">Buscar</button>
             </div>
+            </form>
             <table class="table-list">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Name Companie</th>
                         <th>Logo Company</th>
                         <th>Offer Title</th>
@@ -34,7 +35,6 @@
                     @foreach (var job in Model)
                     {
                         <tr>
-                            <td>@job.ID</td>
                             <td>@job.NameCompany</td>
                             <td><img src="~/img/@job.LogoCompany" alt="" style="width: 50px;"></td>
                             <td>@job.OfferTitle</td>
