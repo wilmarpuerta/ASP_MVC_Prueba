@@ -39,38 +39,42 @@ public class EmployeesController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult>Create(Employe e, IFormFile file, string Genero, string EstadoC)
+    public async Task<IActionResult>Create(Employe e, IFormFile img, IFormFile pdf, string Genero, string EstadoC)
     {
-        string nameFile = file.FileName;
-        string nameFileImg = "";
-        string nameFileDocs = "";
-        string uploadFolder = "";
-        if (nameFile.Contains(".jpg") ||nameFile.Contains(".png") )
-        {
-            uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath + "\\" + "img");
-            nameFileImg = file.FileName;
-        }
-        else if (nameFile.Contains(".pdf"))
-        {
-            uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath + "\\" + "docs");
-            nameFileDocs = file.FileName;
-        }
+        string nameFileImg = img.FileName;
+        string nameFileDocs = pdf.FileName;
+        string uploadFolderImg = Path.Combine(_webHostEnvironment.WebRootPath + "\\" + "img");
+        string uploadFolderDocs = Path.Combine(_webHostEnvironment.WebRootPath + "\\" + "docs");
 
-        if (!Directory.Exists(uploadFolder))
+        if (!Directory.Exists(uploadFolderImg))
                 {
-                    Directory.CreateDirectory(uploadFolder);
+                    Directory.CreateDirectory(uploadFolderImg);
                 }
 
-        string filePath = Path.Combine(uploadFolder, nameFile);
-
-                using (FileStream stream = new FileStream(filePath, FileMode.Create))
+        if (!Directory.Exists(uploadFolderDocs))
                 {
-                    await file.CopyToAsync(stream);
+                    Directory.CreateDirectory(uploadFolderDocs);
+                }
+
+        string filePathImg = Path.Combine(uploadFolderImg, nameFileImg);
+
+                using (FileStream stream = new FileStream(filePathImg, FileMode.Create))
+                {
+                    await img.CopyToAsync(stream);
+                }
+
+        string filePathDocs = Path.Combine(uploadFolderDocs, nameFileDocs);
+
+                using (FileStream stream = new FileStream(filePathDocs, FileMode.Create))
+                {
+                    await pdf.CopyToAsync(stream);
                 }
 
         e.ProfilePicture = nameFileImg;
         e.Cv = nameFileDocs;
-        // _context.Jobs.Add(e);
+        e.CivilStatus = EstadoC;
+        e.Gender = Genero;
+        _context.Employees.Add(e);
         _context.SaveChanges();
         return RedirectToAction("Index");
     }

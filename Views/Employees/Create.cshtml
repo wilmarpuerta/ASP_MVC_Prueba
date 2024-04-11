@@ -1,3 +1,4 @@
+@model Employe;
 @{
     ViewBag.Title = "Crear empleado";
     ViewBag.Css = "formEmpleado.css";
@@ -17,31 +18,31 @@
             <div class="colum1">
            <div>
                 <label for="">Nombres</label>
-                <input type="text">
+                <input type="text" asp-for="Names">
            </div>
            <div>
                 <label for="">Fecha de nacimiento</label>
-                <input type="date">
+                <input type="date" asp-for="BirthDate">
            </div>
            <div>
                 <label for="">Direccion</label>
-                <input type="text">
+                <input type="text" asp-for="Address">
            </div>
            <div>
                 <label for="">Titulo academico</label>
-                <input type="text">
+                <input type="text" asp-for="AcademicTitle">
             </div>
             </div>
 
             <div class="colum2">
            <div>
                 <label for="">Apellidos</label>
-                <input type="text">
+                <input type="text" asp-for="LastNames">
            </div>
            <div>
                 <label for="">Genero</label>
                 <select name="Genero" id="">
-                    <option value="" disabled>Seleccionar estado civil</option>
+                    <option value="" selected disabled>Seleccionar genero</option>
                     <option value="M">Masculino</option>
                     <option value="F">Femenino</option>
                     <option value="O">Otro</option>
@@ -50,7 +51,7 @@
            <div>
                 <label for="">Estado civil</label>
                 <select name="EstadoC" id="">
-                    <option value="" disabled>Seleccionar estado civil</option>
+                    <option value="" selected disabled>Seleccionar estado civil</option>
                     <option value="Soltero">Soltero</option>
                     <option value="Casado">Casado</option>
                     <option value="Divorciado">Divorciado</option>
@@ -60,26 +61,26 @@
            </div>
            <div>
                 <label for="">Area</label>
-                <input type="text">
+                <input type="text" asp-for="Area">
            </div>
            </div>
 
             <div class="colum3">
            <div>
                 <label for="">Correo</label>
-                <input type="text">
+                <input type="text" asp-for="Email">
            </div>
            <div>
                 <label for="">Telefono</label>
-                <input type="text">
+                <input type="text" asp-for="Phone">
            </div>
            <div>
                 <label for="">Salario deseado</label>
-                <input type="text">
+                <input type="text" asp-for="Salary">
            </div>
            <div>
                 <label for="">Idiomas</label>
-                <input type="text">
+                <input type="text" asp-for="Languages">
            </div>
            </div>
            </div>
@@ -87,16 +88,16 @@
 
            <div class="row1">
             <label for="">Acerca de</label>
-            <input type="text">
+            <input type="text" asp-for="About">
            </div>
            <div class="row2">
             <div>
                 <label for="">Foto</label>
-                <input type="file">
+                <input type="file" name="img">
            </div>
            <div>
                 <label for="">Hoja de vida</label>
-                <input type="file">
+                <input type="file" name="pdf">
            </div>
            </div>
            <input class="btn-crear" type="submit" value="Crear nuevo empleado">
