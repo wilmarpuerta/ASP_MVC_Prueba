@@ -80,34 +80,50 @@ public class EmployeesController : Controller
     }
 
 
-    // public async Task<IActionResult> Update(int? id)
-    // {
-    //     return View(await _context.Employees.FirstOrDefaultAsync(m => m.ID == id));
-    // }
+    public async Task<IActionResult> Update(int? id)
+    {
+        return View(await _context.Employees.FirstOrDefaultAsync(m => m.ID == id));
+    }
 
-    // [HttpPost]
-    // public async Task<IActionResult>Update(Employe j, IFormFile file, string status)
-    // {
-    //     string nameFile = file.FileName;
-    //     string uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath + "\\" + "img");
+    [HttpPost]
+    public async Task<IActionResult>Update(Employe e, IFormFile img, IFormFile pdf, string Genero, string EstadoC)
+    {
+        string nameFileImg = img.FileName;
+        string nameFileDocs = pdf.FileName;
+        string uploadFolderImg = Path.Combine(_webHostEnvironment.WebRootPath + "\\" + "img");
+        string uploadFolderDocs = Path.Combine(_webHostEnvironment.WebRootPath + "\\" + "docs");
 
-    //     if (!Directory.Exists(uploadFolder))
-    //             {
-    //                 Directory.CreateDirectory(uploadFolder);
-    //             }
+        if (!Directory.Exists(uploadFolderImg))
+                {
+                    Directory.CreateDirectory(uploadFolderImg);
+                }
 
-    //     string filePath = Path.Combine(uploadFolder, nameFile);
+        if (!Directory.Exists(uploadFolderDocs))
+                {
+                    Directory.CreateDirectory(uploadFolderDocs);
+                }
 
-    //             using (FileStream stream = new FileStream(filePath, FileMode.Create))
-    //             {
-    //                 await file.CopyToAsync(stream);
-    //             }
+        string filePathImg = Path.Combine(uploadFolderImg, nameFileImg);
 
-    //     j.LogoCompany = nameFile;
-    //     j.Status = status;
-    //     _context.Jobs.Update(j);
-    //     _context.SaveChanges();
-    //     return RedirectToAction("Index");
-    // }
+                using (FileStream stream = new FileStream(filePathImg, FileMode.Create))
+                {
+                    await img.CopyToAsync(stream);
+                }
+
+        string filePathDocs = Path.Combine(uploadFolderDocs, nameFileDocs);
+
+                using (FileStream stream = new FileStream(filePathDocs, FileMode.Create))
+                {
+                    await pdf.CopyToAsync(stream);
+                }
+        
+        e.ProfilePicture = nameFileImg;
+        e.Cv = nameFileDocs;
+        e.CivilStatus = EstadoC;
+        e.Gender = Genero;
+        _context.Employees.Update(e);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
    
 }

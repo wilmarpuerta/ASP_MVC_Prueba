@@ -1,0 +1,107 @@
+@model Employe;
+@{
+    ViewBag.Title = "Actualizar empleado";
+    ViewBag.Css = "formEmpleado.css";
+}
+
+<div>
+    <h6 class="display-4 mt-4 fw-bold text-center mb-5">Listado de empleados</h6>
+    <div class="row">
+        <div class="col-md-3 border container-left">
+            <a class="btn btn-secondary" asp-area="" asp-controller="Employees" asp-action="Create">Registrar nuevo empleado</a>
+            <a class="btn btn-primary" asp-area="" asp-controller="Employees" asp-action="Index">Listado de empleados</a>
+        </div>
+        <div class="col-md-8 container-right">
+            <div><h4 class="text-center">Informacion de empleado</h4></div>
+            <form action="Update" method="post" enctype="multipart/form-data">
+            <div class="columFather d-flex justify-content-around">
+            <div class="colum1">
+           <div>
+                <label for="">Nombres</label>
+                <input type="text" asp-for="Names">
+           </div>
+           <div>
+                <label for="">Fecha de nacimiento</label>
+                <input type="date" asp-for="BirthDate">
+           </div>
+           <div>
+                <label for="">Direccion</label>
+                <input type="text" asp-for="Address">
+           </div>
+           <div>
+                <label for="">Titulo academico</label>
+                <input type="text" asp-for="AcademicTitle">
+            </div>
+            </div>
+
+            <div class="colum2">
+           <div>
+                <label for="">Apellidos</label>
+                <input type="text" asp-for="LastNames">
+           </div>
+           <div>
+                <label for="">Genero</label>
+                <select name="Genero" id="">
+                    <option value="" selected disabled>Seleccionar genero</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                    <option value="O">Otro</option>
+                </select>
+           </div>
+           <div>
+                <label for="">Estado civil</label>
+                <select name="EstadoC" id="">
+                    <option value="" selected disabled>Seleccionar estado civil</option>
+                    <option value="Soltero">Soltero</option>
+                    <option value="Casado">Casado</option>
+                    <option value="Divorciado">Divorciado</option>
+                    <option value="Separado">Separado</option>
+                    <option value="Union libre">Union libre</option>
+                </select>
+           </div>
+           <div>
+                <label for="">Area</label>
+                <input type="text" asp-for="Area">
+           </div>
+           </div>
+
+            <div class="colum3">
+           <div>
+                <label for="">Correo</label>
+                <input type="text" asp-for="Email">
+           </div>
+           <div>
+                <label for="">Telefono</label>
+                <input type="text" asp-for="Phone">
+           </div>
+           <div>
+                <label for="">Salario deseado</label>
+                <input type="text" asp-for="Salary">
+           </div>
+           <div>
+                <label for="">Idiomas</label>
+                <input type="text" asp-for="Languages">
+           </div>
+           </div>
+           </div>
+
+
+           <div class="row1">
+            <label for="">Acerca de</label>
+            <input type="text" asp-for="About">
+           </div>
+           <div class="row2">
+            <div>
+                <label for="">Foto</label>
+                <input type="file" name="img">
+           </div>
+           <div>
+                <label for="">Hoja de vida</label>
+                <input type="file" name="pdf">
+           </div>
+           </div>
+           <input class="btn-crear" type="submit" value="Actualizar empleado">
+           </form>
+        </div>
+    </div>
+</div>
