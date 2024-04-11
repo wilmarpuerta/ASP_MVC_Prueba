@@ -125,5 +125,17 @@ public class EmployeesController : Controller
         _context.SaveChanges();
         return RedirectToAction("Index");
     }
+
+    public IActionResult Search(string? SearchString)
+    {
+        var emp = _context.Employees.AsQueryable();
+
+        if (!string.IsNullOrEmpty(SearchString))
+        {
+            emp = emp.Where(u => u.Names.Contains(SearchString) || u.LastNames.Contains(SearchString) || u.Email.Contains(SearchString) || u.About.Contains(SearchString));
+        }
+
+        return View("Index", emp.ToList());
+    }
    
 }
