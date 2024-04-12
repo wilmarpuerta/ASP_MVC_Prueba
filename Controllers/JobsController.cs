@@ -100,7 +100,7 @@ public class JobsController : Controller
 
         if (!string.IsNullOrEmpty(SearchString))
         {
-            jobs = jobs.Where(u => u.NameCompany.Contains(SearchString) || u.OfferTitle.Contains(SearchString) || u.Description.Contains(SearchString) || u.Status.Contains(SearchString) || u.Country.Contains(SearchString) || u.Languages.Contains(SearchString));
+            jobs = jobs.Where(u => u.NameCompany.Contains(SearchString) || u.OfferTitle.Contains(SearchString) || u.Description.Contains(SearchString) || u.Status.Contains(SearchString) || u.Country.Contains(SearchString) || u.Languages.Contains(SearchString) || u.Salary.ToString().Contains(SearchString) || u.Positions.ToString().Contains(SearchString));
         }
 
         return View("Index", jobs.ToList());
